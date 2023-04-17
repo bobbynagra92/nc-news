@@ -1,0 +1,55 @@
+:root {
+  --off-white: #EEEEEE;
+  --gold: #AA9A60;
+  --red: #A92403;
+  --teal: #245F69;
+  --dark-green: #18201D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+header {
+  background-color: var(--red);
+  color: var(--off-white);
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 30px;
+  align-items: center;
+  border: var(--dark-green) solid 1px;
+}
+
+header * {
+  margin: 5px;
+  text-align: left;
+  align-items: center;
+}
+
+header h5 {
+  grid-column-start: 1;
+}
+
+.navbar {
+  grid-row: 1 / span 2;
+  grid-column: 2 / span 1;
+}
+
+.navbar * {
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: 30px;
+  align-items: center;
+}
+
+.nav {
+  position: absolute;
+  width: 45px;
+  right: 0px;
+}
