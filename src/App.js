@@ -5,6 +5,7 @@ import UserLogin from './Components/UserLogin';
 import Loading from './Components/Loading';
 import { useState, useEffect } from 'react';
 import ArticlesList from './Components/ArticlesList';
+import { fetchUsers } from './api';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -12,19 +13,14 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setUsers(fetch('https://be-news-api-m2rq.onrender.com/api/users'))
-    console.log(users);
+    fetchUsers()
+      .then((users) => setUsers(users))
+      .catch((err) => console.log(err));
   }, [setUsers]);
 
   return (
     <main className='App'>
       <Header />
-      <Loading isLoading={isLoading} />
-      {loggedIn ? (
-        <h1>Welcome, {loggedIn.username}</h1>
-      ) : (
-        <UserLogin setLoggedIn={setLoggedIn} />
-        )}
         <ArticlesList />
       <Footer />
     </main>
