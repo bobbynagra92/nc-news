@@ -17,6 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-bottom: 2.5rem;
 }
 
 .article {
@@ -59,6 +60,10 @@
 .vote_num {
   grid-column: 5;
   grid-row: 4;
+}
+
+.single_article {
+  padding-bottom: 2.5rem;
 }
 
 .single_article h1 {
