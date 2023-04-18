@@ -1,30 +1,20 @@
 import './Styles/App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import UserLogin from './Components/UserLogin';
-import Loading from './Components/Loading';
-import { useState, useEffect } from 'react';
 import ArticlesList from './Components/ArticlesList';
-import { fetchUsers } from './api';
+import { Route, Routes } from 'react-router';
+import SingleArticle from './Components/SingleArticle';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [ isLoading, setIsLoading ] = useState(true);
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetchUsers()
-      .then((users) => {
-        setIsLoading(false);
-        return setUsers(users)})
-      .catch((err) => console.log(err));
-  }, [setUsers]);
-
   return (
     <main className='App'>
       <Header />
-        <Loading isLoading={isLoading}/>
-        <ArticlesList />
+      <Routes>
+        <Route path="/" element={<ArticlesList />} />
+        <Route path="/articles" element={<ArticlesList />} />
+        <Route path="/articles/:article_id" element={<SingleArticle />} />
+      </Routes>
+
       <Footer />
     </main>
   );

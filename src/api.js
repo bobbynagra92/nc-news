@@ -13,3 +13,8 @@ export const fetchArticles = async () => {
   const response = await newsAPI.get("/articles");
   return response.data.articles;
 }
+
+export const fetchArticle = async (article_id) => {
+  const response = await newsAPI.get(`/articles/${article_id}`);
+  return response.data.article;
+}
