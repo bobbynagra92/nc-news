@@ -1,0 +1,27 @@
+:root {
+  --off-white: #EEEEEE;
+  --gold: #AA9A60;
+  --red: #A92403;
+  --teal: #245F69;
+  --dark-green: #18201D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+}
+
+.spinner-grow {
+  position: sticky;
+  top: 45vh;
+  text-align: center;
+  align-items: center;
+  color: var(--red);
+}

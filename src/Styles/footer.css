@@ -1,0 +1,35 @@
+:root {
+  --off-white: #EEEEEE;
+  --gold: #AA9A60;
+  --red: #A92403;
+  --teal: #245F69;
+  --dark-green: #18201D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+footer {
+  background-color: var(--red);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+}
+
+.footer {
+  color: var(--off-white);
+  text-decoration: none;
+  font-size: small;
+  margin: 0;
+}
+
+a:hover{
+  color: var(--gold);
+}
