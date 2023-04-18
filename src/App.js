@@ -9,18 +9,21 @@ import { fetchUsers } from './api';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const { isLoading, setIsLoading } = useState(true);
+  const [ isLoading, setIsLoading ] = useState(true);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchUsers()
-      .then((users) => setUsers(users))
+      .then((users) => {
+        setIsLoading(false);
+        return setUsers(users)})
       .catch((err) => console.log(err));
   }, [setUsers]);
 
   return (
     <main className='App'>
       <Header />
+        <Loading isLoading={isLoading}/>
         <ArticlesList />
       <Footer />
     </main>

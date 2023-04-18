@@ -1,13 +1,15 @@
 import Spinner from 'react-bootstrap/Spinner';
-import { useState } from 'react';
+import '../Styles/loading.css'
 
-const Loading = ({ isLoading, setIsLoading }) => {
+const Loading = ({ isLoading }) => {
   if (isLoading) {
-    return <div>
-      <Spinner animation="grow" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
-    </div>;
+    return (
+      <div className='loading'>
+        <Spinner animation='grow' role='status'>
+          <span className='visually-hidden'>Loading...</span>
+        </Spinner>
+      </div>
+    );
   }
 };
 

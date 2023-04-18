@@ -15,18 +15,21 @@
 
 footer {
   background-color: var(--red);
-  color: var(--off-white);
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
+  font-size: small;
 }
 
 .footer {
   color: var(--off-white);
+  text-decoration: none;
+  font-size: small;
+  margin: 0;
 }
 
-.footer a:hover{
+a:hover{
   color: var(--gold);
 }

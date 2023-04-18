@@ -13,6 +13,15 @@
   font-family: 'Cabin', sans-serif;
 }
 
-.App {
+.loading {
+  width: 100vw;
+  height: 100vh;
+}
+
+.spinner-grow {
+  position: sticky;
+  top: 45vh;
   text-align: center;
+  align-items: center;
+  color: var(--red);
 }

@@ -3,9 +3,9 @@ import '../Styles/header.css'
 
 const Menu = () => {
   return (
-    <navbar class='nav'>
+    <nav className='nav'>
       <VscMenu className='menu-icon'/>
-    </navbar>
+    </nav>
   );
 }
 
