@@ -6,6 +6,7 @@ import {
   fetchUsers,
   formatDate,
   matchUserAndAuthor,
+  updateVotes
 } from '../api';
 import Loading from './Loading';
 import { useParams } from 'react-router';
@@ -18,6 +19,7 @@ const SingleArticle = () => {
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentLoading, setCommentLoading] = useState(true);
+  const [votes, setVotes] = useState(null);
 
   useEffect(() => {
     fetchUsers()
@@ -28,6 +30,7 @@ const SingleArticle = () => {
       .then((article) => {
         setArticle(article);
         setIsLoading(false);
+        setVotes(article.votes);
         return fetchArticleComments(article_id);
       })
       .then((comments) => {
@@ -35,12 +38,27 @@ const SingleArticle = () => {
         setCommentLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [article_id, setArticle, setComments, setUsers]);
+  }, [article_id, setArticle, setVotes, setComments, setUsers]);
 
+  
   if (isLoading) {
     return <Loading isLoading={isLoading} />;
   }
+  
+  const plus1 = () => {
+    return updateVotes(1, article_id).then((updatedArticle) => {
+      setVotes(updatedArticle.votes);
+      setArticle(updatedArticle);
+    })
+  }
 
+  const minus1 = () => {
+    updateVotes(-1, article_id).then((updatedArticle) => {
+      setVotes(updatedArticle.votes);
+      setArticle(updatedArticle);
+    });
+  }
+  
   return (
     <main className='single_article' key={article_id}>
       <h1>{article.title}</h1>
@@ -48,13 +66,15 @@ const SingleArticle = () => {
       <h6>Written by {matchUserAndAuthor(article.author, users).name}</h6>
       <h6>Created: {formatDate(article.created_at)}</h6>
       <p id='article-body'>{article.body}</p>
-      <h4>Votes: {article.votes}</h4>
+      <h4>Votes: {votes}</h4>
       <div className='voting_buttons'>
-        <button>Up-Vote 👍</button> <button>Down-Vote 👎</button>
+        <button onClick={plus1}>Up-Vote 👍</button> <button onClick={minus1}>Down-Vote 👎</button>
       </div>
       {commentLoading ? (
         <p>Loading Comments ...</p>
-      ) : comments.length === 0? <p>No Comments</p> : (
+      ) : comments.length === 0 ? (
+        <p>No Comments</p>
+      ) : (
         <>
           <h3>Comments 💬</h3>
           <div className='comments'>

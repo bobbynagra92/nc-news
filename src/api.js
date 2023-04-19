@@ -33,3 +33,8 @@ export const fetchArticleComments = async (article_id) => {
 export const formatDate = (date) => {
   return new Date(date).toLocaleDateString();
 }
+
+export const updateVotes = async (increment, article_id) => {
+  const response = await newsAPI.patch(`/articles/${article_id}`, {inc_votes: increment})
+  return response.data.article
+};
