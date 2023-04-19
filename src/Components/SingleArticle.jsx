@@ -48,17 +48,18 @@ const SingleArticle = () => {
       <h6>Written by {matchUserAndAuthor(article.author, users).name}</h6>
       <h6>Created: {formatDate(article.created_at)}</h6>
       <p id='article-body'>{article.body}</p>
+      <h4>Votes: {article.votes}</h4>
+      <div className='voting_buttons'>
+        <button>Up-Vote 👍</button> <button>Down-Vote 👎</button>
+      </div>
       {commentLoading ? (
-        <Loading isLoading={commentLoading} />
-      ) : (
+        <p>Loading Comments ...</p>
+      ) : comments.length === 0? <p>No Comments</p> : (
         <>
           <h3>Comments 💬</h3>
           <div className='comments'>
             {comments.map((comment) => {
-              const { avatar_url } = matchUserAndAuthor(
-                comment.author,
-                users
-              );
+              const { avatar_url } = matchUserAndAuthor(comment.author, users);
               return (
                 <Toast key={comment.comment_id} className='comment'>
                   <Toast.Header closeButton={false}>
