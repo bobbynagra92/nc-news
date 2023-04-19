@@ -9,6 +9,11 @@ export const fetchUsers = async () => {
   return response.data.users;
 }
 
+export const matchUserAndAuthor = (author, usersArr) => {
+  const {name, avatar_url} = usersArr.filter((user) => user.username === author)[0];
+  return { name, avatar_url };
+}
+
 export const fetchArticles = async () => {
   const response = await newsAPI.get("/articles");
   return response.data.articles;
@@ -17,4 +22,14 @@ export const fetchArticles = async () => {
 export const fetchArticle = async (article_id) => {
   const response = await newsAPI.get(`/articles/${article_id}`);
   return response.data.article;
+}
+
+export const fetchArticleComments = async (article_id) => {
+
+ const response = await newsAPI.get(`/articles/${article_id}/comments`);
+  return response.data.comments;
+}
+
+export const formatDate = (date) => {
+  return new Date(date).toLocaleDateString();
 }

@@ -7,7 +7,7 @@ import SingleArticle from './Components/SingleArticle';
 
 function App() {
   return (
-    <main className='App'>
+    <div className='App'>
       <Header />
       <Routes>
         <Route path="/" element={<ArticlesList />} />
@@ -15,8 +15,8 @@ function App() {
         <Route path="/articles/:article_id" element={<SingleArticle />} />
       </Routes>
 
-      <Footer />
-    </main>
+     <Footer />
+    </div>
   );
 }
 
