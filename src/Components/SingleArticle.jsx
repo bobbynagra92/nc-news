@@ -20,6 +20,7 @@ const SingleArticle = () => {
   const [comments, setComments] = useState([]);
   const [commentLoading, setCommentLoading] = useState(true);
   const [votes, setVotes] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     fetchUsers()
@@ -49,6 +50,7 @@ const SingleArticle = () => {
     return updateVotes(1, article_id).then((updatedArticle) => {
       setVotes(updatedArticle.votes);
       setArticle(updatedArticle);
+      setDisabled(true);
     })
   }
 
@@ -56,6 +58,7 @@ const SingleArticle = () => {
     updateVotes(-1, article_id).then((updatedArticle) => {
       setVotes(updatedArticle.votes);
       setArticle(updatedArticle);
+      setDisabled(true);
     });
   }
   
@@ -68,7 +71,7 @@ const SingleArticle = () => {
       <p id='article-body'>{article.body}</p>
       <h4>Votes: {votes}</h4>
       <div className='voting_buttons'>
-        <button onClick={plus1}>Up-Vote 👍</button> <button onClick={minus1}>Down-Vote 👎</button>
+        <button onClick={plus1} disabled={disabled}>Up-Vote 👍</button> <button onClick={minus1} disabled={disabled}>Down-Vote 👎</button>
       </div>
       {commentLoading ? (
         <p>Loading Comments ...</p>
