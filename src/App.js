@@ -7,7 +7,7 @@ import SingleArticle from './Components/SingleArticle';
 
 function App() {
   return (
-    <main className='App'>
+    <div className='App'>
       <Header />
       <Routes>
         <Route path="/" element={<ArticlesList />} />
@@ -16,7 +16,7 @@ function App() {
       </Routes>
 
      <Footer />
-    </main>
+    </div>
   );
 }
 
