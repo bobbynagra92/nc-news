@@ -59,3 +59,9 @@ header h6 {
   width: 45px;
   right: 0px;
 }
+
+.account_icon {
+  font-size: xx-large;
+  position: absolute;
+  right: 20%;
+}
