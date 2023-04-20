@@ -149,6 +149,11 @@ button {
   padding: 10px 20px;
 }
 
+.vote_error {
+  color: var(--off-white);
+  padding-top: 10px;
+}
+
 
 @media (min-width: 450px){
   .article {

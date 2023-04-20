@@ -21,6 +21,7 @@ const SingleArticle = () => {
   const [commentLoading, setCommentLoading] = useState(true);
   const [votes, setVotes] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchUsers()
@@ -47,18 +48,24 @@ const SingleArticle = () => {
   }
   
   const plus1 = () => {
+    setVotes(votes + 1);
     return updateVotes(1, article_id).then((updatedArticle) => {
-      setVotes(updatedArticle.votes);
       setArticle(updatedArticle);
       setDisabled(true);
-    })
+    }).catch((err) => {
+      setVotes(votes);
+      setError(true);
+    });
   }
 
   const minus1 = () => {
+    setVotes(votes - 1);
     updateVotes(-1, article_id).then((updatedArticle) => {
-      setVotes(updatedArticle.votes);
       setArticle(updatedArticle);
       setDisabled(true);
+    }).catch((err) => {
+      setVotes(votes);
+      setError(true);
     });
   }
   
@@ -72,6 +79,7 @@ const SingleArticle = () => {
       <h4>Votes: {votes}</h4>
       <div className='voting_buttons'>
         <button onClick={plus1} disabled={disabled}>Up-Vote 👍</button> <button onClick={minus1} disabled={disabled}>Down-Vote 👎</button>
+        {error? <p className='vote_error'>Something went wrong, please try again later</p> : null}
       </div>
       {commentLoading ? (
         <p>Loading Comments ...</p>
