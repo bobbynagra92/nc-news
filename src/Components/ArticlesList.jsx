@@ -4,8 +4,8 @@ import '../Styles/articles.css'
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
+
 const ArticlesList = () => {
-  const [users, setUsers] = useState([]);
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,6 +22,16 @@ const ArticlesList = () => {
 
     return (
       <section className='articles-list'>
+        <Link to='/articles/breaking'>
+        <div className='top_story'>
+          <h2>Breaking News</h2>
+          <img
+            src={require('../Images/cameras.jpg')}
+            alt='news cameras'
+          />
+          <h3>Successful Entrepreneur Sets Sights on NZ Tech Industry</h3>
+        </div>
+        </Link>
         {articles.map((article) => (
           <Link to={`/articles/${article.article_id}`} key={article.article_id}>
             <div key={article.article_id} className='article'>

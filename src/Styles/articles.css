@@ -13,6 +13,11 @@
   font-family: 'Cabin', sans-serif;
 }
 
+a {
+  color: black !important;
+  text-decoration: none !important;
+}
+
 .articles-list {
   display: flex;
   flex-wrap: wrap;
@@ -154,8 +159,37 @@ button {
   padding-top: 10px;
 }
 
+.vote_error {
+  color: var(--off-white);
+  padding-top: 10px;
+}
+
+.top_story {
+  width: 95vw;
+  height: 60vh;
+}
+
+.top_story h2 {
+  width: 95vw;
+  text-align: left;
+  margin: 10px 2px;
+  text-decoration: bold; 
+}
+
+.top_story img {
+  width: 100%;
+  height: 60%;
+  margin: 10px 0px;
+  padding-bottom: 5px;
+}
+
+.top_story h3 {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--gold);
+}
 
 @media (min-width: 450px){
+
   .article {
     width: 25vw;
     margin: 15px;
@@ -223,4 +257,27 @@ button {
   margin: 0px;
   border-radius: 50%;
 }
+
+.top_story {
+  width: 75vw;
+  height: 80vh;
+}
+
+.top_story h2 {
+  width: vw;
+  text-align: left;
+  margin: 10px;
+  text-decoration: bold; 
+}
+
+.top_story img {
+  width: 100%;
+  height: 80%;
+  align-items: center;
+  margin: 10px;
+}
+.top_story h3 {
+  padding-bottom: 10px;
+}
+
 }
