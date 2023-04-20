@@ -133,9 +133,25 @@
   text-align: right;
 }
 
+.single_article h4 {
+  background-color: var(--gold);
+  margin: 0px;
+  color: var(--off-white);
+  padding: 10px;
+}
+
 .voting_buttons {
   background-color: var(--gold);
   padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+}
+
+.vote_error {
+  color: var(--off-white);
+  padding-top: 10px;
 }
 
 

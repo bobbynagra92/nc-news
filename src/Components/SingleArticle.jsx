@@ -6,6 +6,7 @@ import {
   fetchUsers,
   formatDate,
   matchUserAndAuthor,
+  updateVotes
 } from '../api';
 import Loading from './Loading';
 import { useParams } from 'react-router';
@@ -18,6 +19,9 @@ const SingleArticle = () => {
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentLoading, setCommentLoading] = useState(true);
+  const [votes, setVotes] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchUsers()
@@ -28,6 +32,7 @@ const SingleArticle = () => {
       .then((article) => {
         setArticle(article);
         setIsLoading(false);
+        setVotes(article.votes);
         return fetchArticleComments(article_id);
       })
       .then((comments) => {
@@ -35,12 +40,35 @@ const SingleArticle = () => {
         setCommentLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [article_id, setArticle, setComments, setUsers]);
+  }, [article_id, setArticle, setVotes, setComments, setUsers]);
 
+  
   if (isLoading) {
     return <Loading isLoading={isLoading} />;
   }
+  
+  const plus1 = () => {
+    setVotes(votes + 1);
+    return updateVotes(1, article_id).then((updatedArticle) => {
+      setArticle(updatedArticle);
+      setDisabled(true);
+    }).catch((err) => {
+      setVotes(votes);
+      setError(true);
+    });
+  }
 
+  const minus1 = () => {
+    setVotes(votes - 1);
+    updateVotes(-1, article_id).then((updatedArticle) => {
+      setArticle(updatedArticle);
+      setDisabled(true);
+    }).catch((err) => {
+      setVotes(votes);
+      setError(true);
+    });
+  }
+  
   return (
     <main className='single_article' key={article_id}>
       <h1>{article.title}</h1>
@@ -48,13 +76,16 @@ const SingleArticle = () => {
       <h6>Written by {matchUserAndAuthor(article.author, users).name}</h6>
       <h6>Created: {formatDate(article.created_at)}</h6>
       <p id='article-body'>{article.body}</p>
-      <h4>Votes: {article.votes}</h4>
+      <h4>Votes: {votes}</h4>
       <div className='voting_buttons'>
-        <button>Up-Vote 👍</button> <button>Down-Vote 👎</button>
+        <button onClick={plus1} disabled={disabled}>Up-Vote 👍</button> <button onClick={minus1} disabled={disabled}>Down-Vote 👎</button>
+        {error? <p className='vote_error'>Something went wrong, please try again later</p> : null}
       </div>
       {commentLoading ? (
         <p>Loading Comments ...</p>
-      ) : comments.length === 0? <p>No Comments</p> : (
+      ) : comments.length === 0 ? (
+        <p>No Comments</p>
+      ) : (
         <>
           <h3>Comments 💬</h3>
           <div className='comments'>
