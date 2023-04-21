@@ -9,7 +9,9 @@ const Header = () => {
       <h1>BBB News</h1>
       </Link>
       <h6>Bobby's Bulletin Board</h6>
+      <Link to="/signin">
       <VscAccount className='account_icon'/>
+      </Link>
       <Menu className='menu-button' />
     </header>
   );
