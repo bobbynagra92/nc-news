@@ -38,3 +38,8 @@ export const updateVotes = async (increment, article_id) => {
   const response = await newsAPI.patch(`/articles/${article_id}`, {inc_votes: increment})
   return response.data.article
 };
+
+export const postComment = async (comment, article_id) => {
+  const response = await newsAPI.post(`/articles/${article_id}/comments`, comment)
+  return response.data.comment
+}

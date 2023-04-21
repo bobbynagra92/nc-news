@@ -15,6 +15,7 @@ function App() {
         <Route path="/articles" element={<ArticlesList />} />
         <Route path="/articles/:article_id" element={<SingleArticle />} />
         <Route path="/articles/breaking" element={<BreakingArticle />} />
+        <Route path="/articles/:article_id/comments" element={<SingleArticle />} />
       </Routes>
 
      <Footer />

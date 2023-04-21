@@ -11,6 +11,7 @@ import {
 import Loading from './Loading';
 import { useParams } from 'react-router';
 import Toast from 'react-bootstrap/Toast';
+import PostComment from './PostComment';
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -110,6 +111,7 @@ const SingleArticle = () => {
           </div>
         </>
       )}
+      <PostComment article_id={article_id} setComments={setComments}/>
     </main>
   );
 };
