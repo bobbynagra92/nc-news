@@ -9,7 +9,7 @@ const BreakingArticle = () => {
       <h6>Created: 5 mins ago</h6>
       <p id='article-body'>
         Bobby Nagra, a successful entrepreneur from the UK has announced that he
-        is now living in New Zealangit checkoud and that he is "more ready than ever to
+        is now living in New Zealand and that he is "more ready than ever to
         take on a new and exciting challenge". Famed for his attention to detail
         as well as his ability to take initiative and appetite for taking
         calculated risks, he says that he is "looking forward to this next
