@@ -43,3 +43,10 @@ export const postComment = async (comment, article_id) => {
   const response = await newsAPI.post(`/articles/${article_id}/comments`, comment)
   return response.data.comment
 }
+
+export const fetchUserByUsername = (username) => {
+  return fetchUsers().then((users) => {
+    const user = users.filter((user) => user.username === username)[0];
+    return user;
+  });
+};

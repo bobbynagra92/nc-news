@@ -1,0 +1,32 @@
+:root {
+  --off-white: #EEEEEE;
+  --gold: #AA9A60;
+  --red: #A92403;
+  --teal: #245F69;
+  --dark-green: #18201D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.login {
+  color: var(--dark-green);
+}
+
+h1, p {
+  margin: 10px; 
+}
+
+.login-form {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.login-button {
+  background-color: var(--red);
+  border-color: var(--red);
+}

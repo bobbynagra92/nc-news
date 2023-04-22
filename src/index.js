@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './Styles/index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
-import ScrollToTop from './helpers/ScrollToTop';
+import { UserProvider } from './Contexts/UserLogin';
+import ScrollToTop from './helpers/ScrollToTop'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <ScrollToTop />
-    <App />
+    <UserProvider>
+      <ScrollToTop />
+      <App />
+    </UserProvider>
   </BrowserRouter>
 );
 
