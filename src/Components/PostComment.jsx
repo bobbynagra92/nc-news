@@ -1,28 +1,38 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import '../Styles/articles.css';
+import Modal from 'react-bootstrap/Modal'
+import '../Styles/comments.css';
 import { postComment } from '../api';
 import { useContext, useState } from 'react';
 import { UserContext } from '../Contexts/UserLogin';
+import { useNavigate } from 'react-router';
 
 function PostComment({ article_id, setComments }) {
   const [comment, setComment] = useState('');
   const [error, setError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const {user, setUser, loggedIn} = useContext(UserContext);
+  const {user, loggedIn} = useContext(UserContext);
 
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/login');
+  }
 
-
+  
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
     const newComment = {
-      username: user,
+      username: user.username,
       body: comment,
       votes: 0,
     };
-    postComment(newComment, article_id).then((postedComment) => {
+
+    return postComment(newComment, article_id).then((postedComment) => {
       setSubmitted(true);
       setComment('');
       return setComments((currentComments) => [...currentComments, postedComment]);
@@ -52,7 +62,21 @@ function PostComment({ article_id, setComments }) {
             }}
           />
           {error && !loggedIn ? (
-            <p>Log In To Post A Comment</p>
+            <>
+              <Modal show={handleShow} onHide={handleClose}>
+                <Modal.Header closeButton onClick={() => {
+                  handleClose();
+                  console.log('clicked')}}>
+                  <Modal.Title>Log In To Continue</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>You must Log In to post a comment.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='primary' onClick={handleClick}>
+                      Click Here Log In
+                    </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
           ) : null}
           {error && loggedIn ? (
             <p>Error Posting Comment. Please Try Again Later</p>

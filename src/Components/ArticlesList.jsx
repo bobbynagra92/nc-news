@@ -18,8 +18,8 @@ const ArticlesList = () => {
       
     }, []);
     
-    {if (isLoading) return <Loading isLoading={isLoading}/>}
-
+    if (isLoading) return <Loading isLoading={isLoading}/>
+    
     return (
       <section className='articles-list'>
         <Link to='/articles/breaking'>

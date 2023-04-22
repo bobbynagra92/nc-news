@@ -5,43 +5,50 @@ import ArticlesList from './Components/ArticlesList';
 import { Route, Routes } from 'react-router';
 import SingleArticle from './Components/SingleArticle';
 import BreakingArticle from './Components/BreakingArticle';
-import { useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from './Contexts/UserLogin';
-import { fetchUserByUsername } from './api';
-import SignIn from './Components/SignIn';
-
+import LogIn from './Components/LogIn';
+import Account from './Components/Account';
 
 function App() {
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
-  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
-  
-  const signOut = () => {
-    setLoggedIn(false);
-    setUser({})
-  }
-  const username = 'grumpy19'
-  const signIn = async (username) => {
-    fetchUserByUsername(username).then(user => {
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
+    if (user) {
       setUser(user);
-    })
-  }
-  const signingIn = signIn(username);
-  console.log(user, 'user')
+    }
 
+    if (loggedIn) {
+      setLoggedIn(loggedIn);
+    }
+    
+  }, [setUser, setLoggedIn]);
 
   return (
     <div className='App'>
-      <Header />
+      <Header
+        user={user}
+        setUser={setUser}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+      />
       <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/" element={<ArticlesList />} />
-        <Route path="/articles" element={<ArticlesList />} />
-        <Route path="/articles/:article_id" element={<SingleArticle />} />
-        <Route path="/articles/breaking" element={<BreakingArticle />} />
-        <Route path="/articles/:article_id/comments" element={<SingleArticle />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path="/account" element={<Account />}/>
+        <Route path='/' element={<ArticlesList />} />
+        <Route path='/articles' element={<ArticlesList />} />
+        <Route path='/articles/:article_id' element={<SingleArticle />} />
+        <Route path='/articles/breaking' element={<BreakingArticle />} />
+        <Route
+          path='/articles/:article_id/comments'
+          element={<SingleArticle />}
+        />
       </Routes>
 
-     <Footer />
+      <Footer />
     </div>
   );
 }

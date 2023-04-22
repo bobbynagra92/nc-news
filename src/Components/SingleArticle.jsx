@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import '../Styles/articles.css';
 import {
   fetchArticle,
-  fetchArticleComments,
   fetchUsers,
+  fetchArticleComments,
   formatDate,
   matchUserAndAuthor,
   updateVotes
 } from '../api';
 import Loading from './Loading';
 import { useParams } from 'react-router';
-import Toast from 'react-bootstrap/Toast';
 import PostComment from './PostComment';
+import Comments from './Comments';
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -79,38 +79,19 @@ const SingleArticle = () => {
       <p id='article-body'>{article.body}</p>
       <h4>Votes: {votes}</h4>
       <div className='voting_buttons'>
-        <button onClick={plus1} disabled={disabled}>Up-Vote 👍</button> <button onClick={minus1} disabled={disabled}>Down-Vote 👎</button>
-        {error? <p className='vote_error'>Something went wrong, please try again later</p> : null}
+        <button onClick={plus1} disabled={disabled}>
+          Up-Vote 👍
+        </button>{' '}
+        <button onClick={minus1} disabled={disabled}>
+          Down-Vote 👎
+        </button>
+        {error ? (
+          <p className='vote_error'>
+            Something went wrong, please try again later
+          </p>
+        ) : null}
       </div>
-      {commentLoading ? (
-        <p>Loading Comments ...</p>
-      ) : comments.length === 0 ? (
-        <p>No Comments</p>
-      ) : (
-        <>
-          <h3>Comments 💬</h3>
-          <div className='comments'>
-            {comments.map((comment) => {
-              const { avatar_url } = matchUserAndAuthor(comment.author, users);
-              return (
-                <Toast key={comment.comment_id} className='comment'>
-                  <Toast.Header closeButton={false}>
-                    <img
-                      src={avatar_url}
-                      className='user_avatar'
-                      alt={`${comment.author} user avatar`}
-                    />
-                    <h6>{comment.author}</h6>
-                    <small>{formatDate(comment.created_at)}</small>
-                  </Toast.Header>
-                  <Toast.Body>{comment.body}</Toast.Body>
-                  <p id='comment-votes'>Votes: {comment.votes}</p>
-                </Toast>
-              );
-            })}
-          </div>
-        </>
-      )}
+      <Comments users={users} comments={comments} commentLoading={commentLoading}/>
       <PostComment article_id={article_id} setComments={setComments}/>
     </main>
   );
