@@ -13,6 +13,10 @@
   font-family: 'Cabin', sans-serif;
 }
 
+a {
+  text-decoration: none !important; 
+}
+
 header {
   background-color: var(--red);
   color: var(--off-white);
@@ -59,9 +63,16 @@ header h6 {
 }
 
 .nav {
-  margin: 5px 10px;
-  width: 90vw;
-  right: 0px;
+  display: flex;
+  background-color: var(--gold);
+  color: var(--off-white);
+  width: 100vw;
+  margin-bottom: 10px
+}
+
+.nav p {
+  margin: 5px 20px;
+  width: 50px;
 }
 
 .account_icon {

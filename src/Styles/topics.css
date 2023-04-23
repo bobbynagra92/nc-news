@@ -1,0 +1,26 @@
+:root {
+  --off-white: #EEEEEE;
+  --gold: #AA9A60;
+  --red: #A92403;
+  --teal: #245F69;
+  --dark-green: #18201D;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Cabin', sans-serif;
+}
+
+a {
+  text-decoration: none !important; 
+}
+
+.topic-articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  padding-bottom: 50px;
+  align-items: center;
+}
