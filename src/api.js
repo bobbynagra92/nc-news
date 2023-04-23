@@ -50,3 +50,13 @@ export const fetchUserByUsername = (username) => {
     return user;
   });
 };
+
+export const fetchTopics = async () => {
+  const response = await newsAPI.get("/topics");
+  return response.data.topics;
+}
+
+export const fetchTopicArticles = async (topic) => {
+  const response = await newsAPI.get(`/articles?topic=${topic}`);
+  return response.data.articles;
+}

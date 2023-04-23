@@ -5,17 +5,24 @@ import ArticlesList from './Components/ArticlesList';
 import { Route, Routes } from 'react-router';
 import SingleArticle from './Components/SingleArticle';
 import BreakingArticle from './Components/BreakingArticle';
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from './Contexts/UserLogin';
 import LogIn from './Components/LogIn';
 import Account from './Components/Account';
+import TopicArticles from './Components/TopicArticles';
+import { fetchTopics } from './api';
 
 function App() {
   const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     const loggedIn = JSON.parse(localStorage.getItem('loggedIn'));
+
+    fetchTopics()
+      .then((topics) => setTopics(topics))
+      .catch((err) => console.log(err));
 
     if (user) {
       setUser(user);
@@ -25,7 +32,7 @@ function App() {
       setLoggedIn(loggedIn);
     }
     
-  }, [setUser, setLoggedIn]);
+  }, [setUser, setLoggedIn, setTopics]);
 
   return (
     <div className='App'>
@@ -34,6 +41,8 @@ function App() {
         setUser={setUser}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
+        topics={topics}
+        setTopics={setTopics}
       />
       <Routes>
         <Route path='/login' element={<LogIn />} />
@@ -46,6 +55,9 @@ function App() {
           path='/articles/:article_id/comments'
           element={<SingleArticle />}
         />
+        {topics.map((topic) => 
+          <Route key={topic.slug} path={`/topics/${topic.slug}`} element={<TopicArticles topic={topic}/>} />
+        )}
       </Routes>
 
       <Footer />
