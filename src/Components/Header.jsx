@@ -4,6 +4,7 @@ import Media from 'react-media';
 import '../Styles/header.css';
 import { fetchTopics } from '../api';
 import { useState, useEffect } from 'react';
+import { Dropdown } from 'react-bootstrap';
 
 const Header = ({user, setUser, loggedIn, setLoggedIn, topics, setTopics}) => {
   
@@ -29,7 +30,23 @@ const Header = ({user, setUser, loggedIn, setLoggedIn, topics, setTopics}) => {
             </Link>
           )}
           <Media queries={{ small: { maxWidth: 450 } }}>
-            <VscMenu className='menu-icon' />
+            <>
+              <Dropdown>
+                <Dropdown.Toggle className='menu-icon'>&#9776;</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {topics.map((topic) => {
+                    return (
+                        <Dropdown.Item
+                          href={`/topics/${topic.slug}`}
+                          key={topic.slug}
+                        >
+                          {topic.slug}
+                        </Dropdown.Item>
+                    );
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </>
           </Media>
         </nav>
       </header>
