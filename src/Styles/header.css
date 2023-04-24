@@ -58,8 +58,11 @@ header h6 {
   position: absolute;
   font-size: xx-large;
   align-items: center;
-  right: 20px;
-  top: 30px
+  right: 0px;
+  top: -80px;
+  background-color: var(--red);
+  border-color: var(--red);
+  color: var(--off-white);
 }
 
 .nav {
@@ -91,3 +94,12 @@ header h6 {
     margin: 0px;
     border-radius: 50%;
   }
+
+.menu-icon::after {
+    display: none !important;
+}
+
+.menu-icon:focus {
+  background-color: var(--red) !important;
+  border-color: var(--red) !important;
+}
