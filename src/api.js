@@ -60,3 +60,8 @@ export const fetchTopicArticles = async (topic) => {
   const response = await newsAPI.get(`/articles?topic=${topic}`);
   return response.data.articles;
 }
+
+export const fetchAndSortTopicArticles = async (topic, sort_by="", order_by="") => {
+  const response = await newsAPI.get(`/articles?topic=${topic}&sort_by=${sort_by}&order_by=${order_by}`);
+  return response.data.articles;
+}
